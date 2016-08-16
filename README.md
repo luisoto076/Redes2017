@@ -1,2 +1,3 @@
 # Redes2017
-luis soto martinez
+Pérez	Mendoza Margarita
+Soto Martinez Luis

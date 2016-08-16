@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtGui, QtCore
-from GUI import loggin,calculadora,calculadora_cientifica
+from GUI import loggin,calculadora,calculadora_cientifica,registro
 from Code import Calculator, ScientificCalculator
 from Constants import *
 import sys
@@ -12,7 +12,7 @@ cal = ScientificCalculator.ScientificCalculator()
 def access(lw,cw):
 	usr = lw.usr_widget.text()
 	pasword = lw.pasword_widget.text()
-	if(cal.valida(usr,pasword)):
+	if cal.valida(str(usr),str(pasword)):
 		cw.show()
 		lw.close()
 	
@@ -26,8 +26,10 @@ def pressequal(display_widget):
 	except ZeroDivisionError as detail:
 		display_widget.setText('')
 		aviso = loggin.ErrorWindow("No puedes dividir entre cero").exec_()
-		
 
+def registra():
+   rw = registro.RegisterWindow()
+   rw.show()
 
 # **************************************************
 #  Definicion de la funcion principal
@@ -37,6 +39,7 @@ def main():
     lw = loggin.LoginWindow()
     cw = calculadora_cientifica.ScientificCalculatorWindow()   
     cw.equal_button.clicked.connect(lambda: pressequal(cw.display_widget))
+    cw.registra_button.clicked.connect(lambda: registra())
     lw.login_button.clicked.connect(lambda: access(lw,cw))
     mainWindow = lw
     sys.exit(app.exec_())
